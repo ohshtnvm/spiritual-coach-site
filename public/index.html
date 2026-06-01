@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coach — TSV-Powered Site</title>
+<meta name="description" content="A TSV-powered coaching website template.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="/">
+<meta name="theme-color" content="#1D9E75">
+<!-- Open Graph / Twitter (populated at runtime from TSV) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coach">
+<meta property="og:description" content="A TSV-powered coaching website template.">
+<meta property="og:image" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Coach">
+<meta name="twitter:description" content="A TSV-powered coaching website template.">
+<meta name="twitter:image" content="">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+
+<style>
+:root{
+  --primary:#1D9E75; --primary-dark:#157a5a; --secondary:#0f172a; --accent:#f59e0b;
+  --text:#1f2937; --muted:#64748b; --bg:#ffffff; --bg-alt:#f6f8f7; --bg-dark:#0f172a;
+  --border:#e6eae8; --radius:14px; --shadow:0 6px 24px rgba(15,23,42,.07);
+  --shadow-lg:0 20px 50px rgba(15,23,42,.12);
+  --font-head:'Plus Jakarta Sans',system-ui,sans-serif; --font-body:'Inter',system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.6;font-size:16px;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.15;color:var(--secondary);font-weight:800;letter-spacing:-.02em}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{padding:84px 0}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:14px}
+.section-head{max-width:680px;margin:0 auto 52px;text-align:center}
+.section-head h2{font-size:clamp(1.8rem,3.6vw,2.7rem);margin-bottom:14px}
+.section-head p{color:var(--muted);font-size:1.08rem}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-head);font-weight:700;font-size:.98rem;
+  padding:13px 26px;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:.2s;min-height:46px;white-space:nowrap}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn-ghost{background:transparent;color:var(--secondary);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+.btn-light{background:#fff;color:var(--secondary)}
+.btn-light:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:var(--font-head);font-weight:800;font-size:1.25rem;color:var(--secondary);display:flex;align-items:center;gap:9px;white-space:nowrap}
+.logo .dot{width:11px;height:11px;border-radius:50%;background:var(--primary);display:inline-block;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-weight:600;font-size:.95rem;color:var(--text);transition:.15s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{display:flex;align-items:center;gap:14px}
+.burger{display:none;background:none;border:0;font-size:1.6rem;color:var(--secondary);cursor:pointer}
+
+/* HERO */
+.hero{padding:72px 0 90px;background:linear-gradient(180deg,var(--bg-alt),var(--bg))}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);
+  padding:7px 15px;border-radius:999px;font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:22px;box-shadow:var(--shadow)}
+.hero-badge i{color:var(--primary)}
+.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:20px}
+.hero h1 .hl{color:var(--primary)}
+.hero-sub{font-size:1.18rem;color:var(--muted);margin-bottom:30px;max-width:540px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:34px;flex-wrap:wrap}
+.stat .v{font-family:var(--font-head);font-size:1.9rem;font-weight:800;color:var(--secondary)}
+.stat .l{font-size:.86rem;color:var(--muted);font-weight:500}
+.hero-media{position:relative}
+.hero-media img{border-radius:24px;box-shadow:var(--shadow-lg);width:100%;aspect-ratio:4/5;object-fit:cover}
+.hero-float{position:absolute;left:-20px;bottom:28px;background:#fff;border-radius:14px;padding:14px 18px;
+  box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;border:1px solid var(--border)}
+.hero-float .ic{width:40px;height:40px;border-radius:10px;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:1.2rem}
+.hero-float .t1{font-weight:800;font-family:var(--font-head);color:var(--secondary);line-height:1.1}
+.hero-float .t2{font-size:.8rem;color:var(--muted)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.about-media img{border-radius:22px;box-shadow:var(--shadow-lg);aspect-ratio:1/1;object-fit:cover;width:100%}
+.about h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:18px}
+.about .intro{font-size:1.15rem;color:var(--text);font-weight:500;margin-bottom:16px}
+.about .story{color:var(--muted);margin-bottom:24px}
+.about .story p{margin-bottom:12px}
+.about-points{list-style:none;display:grid;gap:13px;margin-bottom:26px}
+.about-points li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.about-points i{color:var(--primary);font-size:1.3rem;flex-shrink:0}
+.sig{font-family:var(--font-head);font-weight:800;color:var(--secondary);font-size:1.1rem}
+
+/* SERVICES */
+.services{background:var(--bg-alt)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.s-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px;transition:.2s;display:flex;flex-direction:column}
+.s-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.s-icon{width:54px;height:54px;border-radius:14px;background:color-mix(in srgb,var(--primary) 14%,#fff);
+  color:var(--primary);display:grid;place-items:center;font-size:1.6rem;margin-bottom:18px}
+.s-card h3{font-size:1.35rem;margin-bottom:6px}
+.s-aud{font-size:.82rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.s-desc{color:var(--muted);margin-bottom:18px}
+.s-meta{display:flex;gap:16px;font-size:.85rem;color:var(--muted);margin-bottom:18px;flex-wrap:wrap}
+.s-meta span{display:inline-flex;align-items:center;gap:6px}
+.s-meta i{color:var(--primary)}
+.feat{list-style:none;display:grid;gap:9px;margin-bottom:22px}
+.feat li{display:flex;gap:10px;font-size:.94rem}
+.feat i{color:var(--primary);font-size:1.1rem;flex-shrink:0}
+.s-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.s-price{font-family:var(--font-head);font-weight:800;font-size:1.5rem;color:var(--secondary)}
+.s-price small{font-size:.8rem;font-weight:500;color:var(--muted)}
+
+/* TESTIMONIALS */
+.t-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:26px}
+.t-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.stars{color:var(--accent);font-size:1.05rem;margin-bottom:14px;letter-spacing:2px}
+.t-quote{font-size:1.05rem;color:var(--text);margin-bottom:20px;flex-grow:1}
+.t-quote::before{content:'\201C';font-family:Georgia,serif;font-size:2.6rem;line-height:0;color:var(--primary);vertical-align:-.4em;margin-right:4px}
+.t-result{background:var(--bg-alt);border-radius:10px;padding:12px 14px;margin-bottom:18px;display:flex;align-items:baseline;gap:8px}
+.t-result .rv{font-family:var(--font-head);font-weight:800;color:var(--primary);font-size:1.3rem}
+.t-result .rl{font-size:.82rem;color:var(--muted)}
+.t-author{display:flex;align-items:center;gap:13px}
+.t-author img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.t-author .ph{width:48px;height:48px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800;font-family:var(--font-head)}
+.t-author .n{font-weight:700;color:var(--secondary);line-height:1.2}
+.t-author .r{font-size:.85rem;color:var(--muted)}
+
+/* PRICING */
+.pricing{background:var(--bg-alt)}
+.p-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px;align-items:stretch}
+.p-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:32px;display:flex;flex-direction:column;position:relative;transition:.2s}
+.p-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.p-card.popular{border:2px solid var(--primary);box-shadow:var(--shadow-lg)}
+.p-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;
+  font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 16px;border-radius:999px}
+.p-name{font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--secondary);margin-bottom:4px}
+.p-aud{font-size:.88rem;color:var(--muted);margin-bottom:18px}
+.p-price{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+.p-price .amt{font-family:var(--font-head);font-size:2.6rem;font-weight:800;color:var(--secondary)}
+.p-price .per{color:var(--muted);font-size:.95rem}
+.p-dur{font-size:.85rem;color:var(--muted);margin-bottom:22px}
+.p-feat{list-style:none;display:grid;gap:11px;margin-bottom:26px}
+.p-feat li{display:flex;gap:10px;font-size:.94rem}
+.p-feat i{font-size:1.15rem;flex-shrink:0}
+.p-feat .yes i{color:var(--primary)}
+.p-feat .no{color:var(--muted)}
+.p-feat .no i{color:#cbd5e1}
+.p-card .btn{margin-top:auto;justify-content:center}
+
+/* FAQ */
+.faq-wrap{max-width:780px;margin:0 auto;display:grid;gap:12px}
+.faq-item{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:0;padding:20px 22px;font-family:var(--font-head);
+  font-weight:700;font-size:1.05rem;color:var(--secondary);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q i{color:var(--primary);transition:.25s;flex-shrink:0;font-size:1.3rem}
+.faq-item.open .faq-q i{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted)}
+.faq-a-inner{padding:0 22px 20px}
+.faq-item.open .faq-a{max-height:600px}
+
+/* BLOG */
+.b-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.b-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:.2s;cursor:pointer;display:flex;flex-direction:column}
+.b-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.b-card img{aspect-ratio:16/9;object-fit:cover;width:100%}
+.b-body{padding:24px;display:flex;flex-direction:column;flex-grow:1}
+.b-cat{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--primary);margin-bottom:10px}
+.b-card h3{font-size:1.25rem;margin-bottom:10px;line-height:1.25}
+.b-ex{color:var(--muted);font-size:.95rem;margin-bottom:16px;flex-grow:1}
+.b-meta{font-size:.83rem;color:var(--muted);display:flex;gap:14px;align-items:center}
+.b-more{margin-top:14px;font-weight:700;color:var(--primary);display:inline-flex;align-items:center;gap:6px;font-size:.92rem}
+
+/* FINAL CTA */
+.cta-final{background:var(--secondary);color:#fff;text-align:center;border-radius:0}
+.cta-final h2{color:#fff;font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:16px}
+.cta-final p{color:rgba(255,255,255,.8);font-size:1.15rem;max-width:560px;margin:0 auto 30px}
+
+/* FOOTER */
+footer{background:var(--bg-dark);color:#cbd5e1;padding:60px 0 28px}
+.f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:44px}
+.f-brand .logo{color:#fff;margin-bottom:14px}
+.f-brand p{color:#94a3b8;max-width:320px;font-size:.95rem}
+.f-col h4{color:#fff;font-size:.95rem;margin-bottom:16px;font-family:var(--font-head)}
+.f-col a,.f-col p{display:block;color:#94a3b8;font-size:.93rem;margin-bottom:10px;transition:.15s}
+.f-col a:hover{color:var(--primary)}
+.f-social{display:flex;gap:12px;margin-top:6px}
+.f-social a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:1.2rem;color:#cbd5e1}
+.f-social a:hover{background:var(--primary);color:#fff}
+.f-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;color:#64748b;font-size:.88rem}
+
+/* BOOK MODAL */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.6);backdrop-filter:blur(4px)}
+.modal.open{display:flex}
+.modal-box{background:#fff;border-radius:18px;width:100%;max-width:980px;height:min(86vh,760px);position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+.modal-close{position:absolute;top:12px;right:12px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:#fff;
+  box-shadow:var(--shadow);cursor:pointer;font-size:1.3rem;color:var(--secondary);display:grid;place-items:center}
+.modal-box iframe{width:100%;height:100%;border:0}
+
+/* BLOG POST OVERLAY */
+.post-overlay{position:fixed;inset:0;z-index:90;background:var(--bg);overflow-y:auto;display:none}
+.post-overlay.open{display:block}
+.post-hero{position:relative;height:42vh;min-height:300px}
+.post-hero img{width:100%;height:100%;object-fit:cover}
+.post-hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,42,.1),rgba(15,23,42,.75))}
+.post-back{position:fixed;top:20px;left:20px;z-index:3;background:#fff;border:0;border-radius:999px;padding:10px 18px;
+  font-weight:700;font-family:var(--font-head);box-shadow:var(--shadow-lg);cursor:pointer;display:inline-flex;gap:8px;align-items:center;color:var(--secondary)}
+.post-head{position:absolute;bottom:0;left:0;right:0;color:#fff;padding:40px 0}
+.post-head .container{max-width:760px}
+.post-head .b-cat{color:#fff;opacity:.9}
+.post-head h1{color:#fff;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:14px}
+.post-head .pm{color:rgba(255,255,255,.85);font-size:.9rem;display:flex;gap:16px;flex-wrap:wrap}
+.post-body{max-width:760px;margin:0 auto;padding:54px 24px 90px;font-size:1.1rem;line-height:1.8;color:var(--text)}
+.post-body h2{font-size:1.7rem;margin:36px 0 14px}
+.post-body h3{font-size:1.3rem;margin:28px 0 10px}
+.post-body p{margin-bottom:20px}
+.post-body ul,.post-body ol{margin:0 0 20px 24px}
+.post-body li{margin-bottom:8px}
+.post-body blockquote{border-left:4px solid var(--primary);padding:6px 0 6px 22px;margin:24px 0;color:var(--muted);font-style:italic;font-size:1.15rem}
+.post-body a{color:var(--primary);text-decoration:underline}
+
+.loading{min-height:60vh;display:grid;place-items:center;color:var(--muted);font-weight:600;gap:14px}
+.spin{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.reveal{opacity:0;transform:translateY(20px);transition:.6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:920px){
+  .hero-grid,.about-grid{grid-template-columns:1fr;gap:36px}
+  .hero-media{order:-1}
+  .about-media{order:-1}
+  .f-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  section{padding:60px 0}
+  .nav-links{position:fixed;inset:70px 0 auto 0;background:#fff;flex-direction:column;gap:0;padding:10px 24px 24px;
+    border-bottom:1px solid var(--border);box-shadow:var(--shadow);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px 0;width:100%;border-bottom:1px solid var(--border)}
+  .burger{display:block}
+  .nav .nav-cta .btn{display:none}
+  .hero-stats{gap:24px}
+  .f-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo" id="logo"><span class="dot"></span><span id="logo-text">Coach</span></a>
+    <nav class="nav-links" id="nav-links"></nav>
+    <div class="nav-cta">
+      <button class="btn btn-primary" data-book><i class="ti ti-calendar"></i><span id="nav-cta-text">Book a call</span></button>
+      <button class="burger" id="burger" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+    </div>
+  </div>
+</header>
+
+<main id="app" aria-live="polite">
+  <div class="loading"><div class="spin"></div><span>Loading site…</span></div>
+</main>
+
+<!-- BOOK MODAL -->
+<div class="modal" id="book-modal" aria-hidden="true">
+  <div class="modal-box">
+    <button class="modal-close" data-close-book aria-label="Close"><i class="ti ti-x"></i></button>
+    <iframe id="cal-frame" title="Booking calendar" loading="lazy"></iframe>
+  </div>
+</div>
+
+<!-- BLOG POST OVERLAY -->
+<div class="post-overlay" id="post-overlay">
+  <button class="post-back" id="post-back"><i class="ti ti-arrow-left"></i> Back</button>
+  <div id="post-content"></div>
+</div>
+
+<script id="jsonld" type="application/ld+json"></script>
+
+<!-- EMBEDDED FALLBACK TSV (used when coach-data.tsv can't be fetched, e.g. file://). Sync with: node build.js -->
+<script id="fallback-tsv" type="text/tab-separated-values">
+#config
+key	value
+coach_name	John Carter
+coach_title	Business Coach & Investor
+coach_type	business
+logo_text	John Carter
+currency	USD
+primary_color	#1D9E75
+secondary_color	#0f172a
+accent_color	#f59e0b
+text_dark	#1f2937
+bg_light	#f6f8f7
+font_heading	Plus Jakarta Sans
+font_body	Inter
+site_domain	https://johncarter.example.com
+email	hello@johncarter.example.com
+phone	+1 (555) 123-4567
+location	Austin, TX · Remote worldwide
+calcom_link	rockt/discovery-call
+cta_primary_text	Book a strategy call
+linkedin	https://linkedin.com/in/example
+twitter	https://x.com/example
+instagram	
+facebook	
+meta_title	Business Coaching for Founders & Entrepreneurs | John Carter
+meta_description	Scale your business from idea to $$1M+ with proven frameworks, accountability and strategic guidance. Book a free strategy call with John Carter today.
+meta_keywords	business coach, executive coaching, startup coach, founder coaching, scale business
+og_image	https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&q=75&auto=format&fit=crop
+show_testimonials	true
+show_pricing	true
+show_faq	true
+show_blog	true
+footer_tagline	Built for founders. Powered by proven frameworks.
+
+#nav
+label	anchor
+About	#about
+Services	#services
+Pricing	#pricing
+Results	#testimonials
+Insights	#blog
+FAQ	#faq
+
+#meta
+key	value
+services_eyebrow	How I help
+services_heading	Coaching built around your stage
+services_intro	Choose the engagement that matches where your business is today.
+testimonials_eyebrow	Proof
+testimonials_heading	Founders who scaled with the system
+testimonials_intro	Real results from real operators — not vanity metrics.
+pricing_eyebrow	Investment
+pricing_heading	Simple, transparent pricing
+pricing_intro	No hidden fees. Clear outcomes. Cancel anytime.
+faq_eyebrow	Questions
+faq_heading	Everything you need to know
+faq_intro	Still unsure? Book a call and ask me directly.
+blog_eyebrow	Insights
+blog_heading	Frameworks & field notes
+blog_intro	Tactical playbooks I share with my private clients.
+
+#hero
+key	value
+badge	Trusted by 200+ founders
+headline	Scale your business to *$$1M+* in 18 months or less
+subheadline	Work with a coach who has built and exited multiple 8-figure companies. Get the accountability, frameworks and strategy to grow — without the guesswork.
+cta_text	Book a free strategy call
+cta_secondary_text	See how it works
+cta_secondary_url	#services
+image	https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=75&auto=format&fit=crop
+image_alt	John Carter, business coach, in a confident portrait
+float_icon	trending-up
+float_value	$$240M+
+float_label	client revenue added
+stat1_value	200+
+stat1_label	founders coached
+stat2_value	14yrs
+stat2_label	operating experience
+stat3_value	4.9/5
+stat3_label	average rating
+
+#about
+key	value
+eyebrow	About John
+heading	I’ve been in your seat — and built the playbook to get out
+image	https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=75&auto=format&fit=crop
+image_alt	John Carter mentoring a founder at a whiteboard
+intro	I help founders and entrepreneurs scale from zero to millions without burning out.
+story	<p>I started as a bootstrapped founder with no network and no funding. Over 14 years I built and scaled three companies to a combined <strong>$$50M+ ARR</strong> and exited two of them.</p><p>Today I work with 20–30 founders a year, helping them install the systems, hire the right team, and make the strategic bets that compound. No fluff — just the frameworks that actually move revenue.</p>
+points	Scaled 3 companies to $$50M+ combined ARR|Backed 30+ startups as an angel investor|Featured in Forbes, Inc. and TechCrunch|Direct, data-driven, accountability-first
+signature	— John Carter
+
+#services
+name	slug	target_audience	description	duration	frequency	deliverables	price	pricing_model	icon	cta_text	order
+1:1 Executive Coaching	executive-coaching	Founders $$100K–$$1M ARR	High-touch coaching to sharpen strategy, fix bottlenecks and hold you accountable to aggressive growth targets.	6 months	Bi-weekly	12 one-hour calls|Direct email & WhatsApp access|Custom growth strategy doc|Template & resource library	5000	one-time	briefcase	Book a discovery call	1
+90-Day Strategy Intensive	strategy-intensive	Founders preparing to scale fast	A focused sprint to audit your business, build a 90-day roadmap and execute with weekly accountability.	90 days	Weekly	12 weekly calls|Full business audit & roadmap|Weekly accountability check-ins|KPI dashboard setup	8000	one-time	target-arrow	Apply for a sprint	2
+Done-With-You Scale Program	scale-program	Teams pushing past $$1M ARR	My most comprehensive program — a full transformation with group coaching and an investor network introduction.	12 months	Bi-weekly + monthly group	24 one-hour calls|Weekly Slack support|Full transformation roadmap|Monthly founder group coaching|Investor network access	15000	retainer	rocket	Request an invite	3
+
+#testimonials
+client_name	role	company	industry	testimonial	result_metric	result_value	photo	rating
+Sarah Mitchell	Founder & CEO	Lumen SaaS	B2B Software	John helped me go from a stalled $$30K/month to a clear path past seven figures. The frameworks alone paid for the program in the first 60 days.	Annual revenue	$$30K → $$1.4M ARR	https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&q=75&auto=format&fit=crop	5
+David Okafor	Co-founder	Northbound Logistics	Operations	The accountability was the unlock. We tightened our ops, doubled margins and finally hired the leadership team I’d been avoiding for years.	Profit margin	+22% margin	https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&q=75&auto=format&fit=crop	5
+Priya Raman	Founder	Bloom Studio	E-commerce	I came in overwhelmed and left with systems. We 3x’d revenue in a year and I work fewer hours than before. Genuinely life-changing coaching.	Growth rate	3x in 12 months	https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&q=75&auto=format&fit=crop	5
+
+#pricing
+tier_name	slug	price	currency	billing	duration	target_audience	features	excluded	is_popular	cta_text	order
+Starter	starter	1500	USD	monthly	3 month minimum	Solo founders exploring coaching	Monthly strategy call|Email support|Growth checklist|Resource library access	Slack support|Group coaching|Investor network	false	Get started	1
+Growth	growth	4000	USD	monthly	6 month engagement	Scaling founders ($$100K–$$1M ARR)	Bi-weekly coaching calls|Slack support|Custom growth strategy|Template library|90-day action plan	Investor network	true	Start scaling	2
+Scale	scale	12000	USD	monthly	12 month engagement	Ambitious founders aiming for $$1M+ ARR	Weekly 1:1 calls|Priority Slack support|Full transformation roadmap|Monthly group coaching|Investor network access		false	Request an invite	3
+
+#faq
+question	answer	category	order
+How do I know if coaching is right for me?	<p>If you’re a founder who is serious about growth, coachable, and willing to do the work between sessions, coaching pays for itself many times over. The best way to find out is a free strategy call — we’ll diagnose your biggest bottleneck before you commit to anything.</p>	fit	1
+What results can I realistically expect?	<p>Most clients see measurable movement within 60–90 days — clearer strategy, better margins, and a working growth system. Revenue outcomes vary by stage and execution, but every engagement is built around specific, agreed KPIs.</p>	results	2
+How much time does it require each week?	<p>Plan for your call plus 2–4 hours of focused implementation per week. The coaching is designed to <em>save</em> you time by killing low-leverage work, not add to your plate.</p>	commitment	3
+What’s your refund / cancellation policy?	<p>Monthly plans can be cancelled anytime before your next billing date. Intensives include a 14-day satisfaction guarantee — if the first sessions aren’t a fit, you get a full refund.</p>	pricing	4
+Do you only work with tech startups?	<p>No. I work with founders across SaaS, e-commerce, services and logistics. The frameworks are industry-agnostic — what matters is that you have a real business with room to scale.</p>	fit	5
+How do we actually work together?	<p>Everything runs through scheduled video calls plus async support (email or Slack depending on your tier). You’ll get a shared workspace with your roadmap, KPIs and resources so nothing falls through the cracks.</p>	process	6
+
+#blog
+title	slug	meta_description	content	publish_date	category	tags	reading_time	image	image_alt	author	featured
+The $$1M Founder Operating System: 5 Systems That Scale	founder-operating-system	The five core systems every founder must install to scale past seven figures without burning out — and how to sequence them.	<p>Most founders don’t have a growth problem — they have a systems problem. Below are the five systems I install with every client, in the order that creates the most leverage.</p><h2>1. The Weekly Operating Rhythm</h2><p>A single weekly meeting that reviews your three north-star metrics and the one bottleneck blocking them. Everything else is noise.</p><h2>2. The Hiring Scorecard</h2><p>Stop hiring on vibes. Define the outcomes a role must produce in 90 days, then interview against that scorecard.</p><blockquote>You don’t rise to your goals — you fall to your systems.</blockquote><h2>3. The Cash Dashboard</h2><p>One screen: revenue, runway, and CAC payback. If you can’t see it weekly, you can’t steer it.</p><h2>4. The Delegation Ladder</h2><p>Document, demonstrate, delegate, then disappear. Most founders skip the first two steps and wonder why delegation fails.</p><h2>5. The Strategic Bet</h2><p>One concentrated bet per quarter. Focus beats hustle every time.</p><p>Install these in sequence and growth stops feeling like chaos and starts feeling like a machine.</p>	2026-05-12	frameworks	scaling,systems,operations	6	https://images.unsplash.com/photo-1551434678-e076c223a692?w=700&q=75&auto=format&fit=crop	Team collaborating on a growth strategy at a desk	John Carter	true
+How to Hire Your First Leadership Team (Without Regret)	first-leadership-team	A practical framework for making your first executive hires — when to hire, who to hire first, and how to avoid the classic founder mistakes.	<p>Your first leadership hires will make or break your next stage of growth. Here’s how to get them right.</p><h2>Hire for the bottleneck, not the org chart</h2><p>Don’t copy a Series-B org chart onto a pre-Series-A company. Hire the one role that removes your biggest constraint right now.</p><h2>The 90-day outcome test</h2><p>Before you open a role, write the three outcomes this person must deliver in 90 days. If you can’t, you’re not ready to hire them.</p><ul><li>Define outcomes before titles</li><li>Interview for evidence, not enthusiasm</li><li>Reference-check relentlessly</li></ul><h2>Let go of the rope</h2><p>The hardest part isn’t hiring — it’s trusting. Give your new leaders real ownership or you’ve just hired expensive assistants.</p>	2026-04-28	insights	hiring,leadership,team	5	https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&q=75&auto=format&fit=crop	A founder interviewing a candidate across a table	John Carter	false
+Case Study: From $$30K/Month to $$1.4M ARR in 11 Months	case-study-lumen-saas	The exact playbook one SaaS founder used to break through a revenue plateau and scale to seven figures in under a year.	<p>When Sarah came to me, Lumen SaaS had been stuck at $$30K/month for nine months. Here’s precisely what we changed.</p><h2>Step 1: Killed the wrong customers</h2><p>We cut the bottom 40% of accounts that drained support and raised prices on the rest. Revenue dipped for one month, then climbed.</p><h2>Step 2: Built a repeatable sales motion</h2><p>We documented the one channel that worked and doubled down instead of chasing five at once.</p><h2>Step 3: Hired ahead of the curve</h2><p>One senior account executive, hired against a clear scorecard, added more pipeline than the previous three junior reps combined.</p><blockquote>Focus didn’t shrink the business — it unlocked it.</blockquote><p>Eleven months later: $$1.4M ARR, healthier margins, and a founder who finally takes weekends off.</p>	2026-04-09	case-studies	case-study,saas,growth	7	https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=75&auto=format&fit=crop	A rising revenue chart on a laptop screen	John Carter	false
+
+#cta_final
+key	value
+heading	Ready to scale your business?
+subheadline	Let’s talk about your goals and build a 90-day action plan together — free, no pitch.
+cta_text	Book your free strategy call
+
+#footer
+key	value
+about_text	Business coaching for founders who are serious about growth. Proven frameworks, real accountability, measurable results.
+cta_text	Book a free strategy call and let’s map your next move.
+copyright	All rights reserved.
+</script>
+
+<script>
+/* ============ TSV ENGINE ============ */
+const RAW_FIELDS = new Set(['story','description','answer','content','subheadline','intro','about_text','footer_about']);
+
+function parseMultiSheetTSV(text){
+  const sheets = {};
+  let cur=null, headers=null;
+  for(const raw of text.split(/\r?\n/)){
+    if(raw.trim()==='') continue;
+    if(raw.trim().startsWith('//')) continue;
+    if(raw[0]==='#'){ cur=raw.slice(1).trim(); sheets[cur]=[]; headers=null; continue; }
+    if(cur===null) continue;
+    const cells = raw.split('\t');
+    if(headers===null){ headers=cells.map(h=>h.trim()); sheets[cur].__headers=headers; continue; }
+    const row={};
+    headers.forEach((h,i)=>{ row[h]=(cells[i]??'').replace(/\\n/g,'\n').trim(); });
+    sheets[cur].push(row);
+  }
+  return sheets;
+}
+// key/value sheet -> object
+function kv(rows){ const o={}; (rows||[]).forEach(r=>{ const k=r.key||r.Key; if(k) o[k]=r.value??r.Value??''; }); return o; }
+const esc = s => (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const list = (s,sep='|') => (s||'').split(sep).map(x=>x.trim()).filter(Boolean);
+const bool = s => String(s).toLowerCase()==='true';
+const money = (n,cur='USD') => {
+  const num = Number(String(n).replace(/[^0-9.]/g,''));
+  if(!num) return n||'';
+  const sym = {USD:'$',EUR:'€',GBP:'£',CAD:'C$',AUD:'A$'}[cur]||'$';
+  return sym + num.toLocaleString();
+};
+
+let CFG = {}, CAL = '';
+
+/* ============ RENDERERS ============ */
+function applyConfig(c){
+  CFG = c;
+  const set=(k,v)=>{ if(v) document.documentElement.style.setProperty(k,v); };
+  set('--primary',c.primary_color); set('--secondary',c.secondary_color);
+  set('--accent',c.accent_color); set('--text',c.text_dark); set('--bg-alt',c.bg_light);
+  if(c.primary_color){ // derive darker hover
+    document.documentElement.style.setProperty('--primary-dark', shade(c.primary_color,-18));
+  }
+  if(c.font_heading||c.font_body){
+    const fams=[...new Set([c.font_heading,c.font_body].filter(Boolean))]
+      .map(f=>f.replace(/ /g,'+')+':wght@400;500;600;700;800').join('&family=');
+    const l=document.createElement('link'); l.rel='stylesheet';
+    l.href='https://fonts.googleapis.com/css2?family='+fams+'&display=swap'; document.head.appendChild(l);
+    if(c.font_heading) document.documentElement.style.setProperty('--font-head',`'${c.font_heading}',sans-serif`);
+    if(c.font_body) document.documentElement.style.setProperty('--font-body',`'${c.font_body}',sans-serif`);
+  }
+  // SEO meta
+  document.title = c.meta_title || c.coach_name || 'Coach';
+  setMeta('name','description',c.meta_description);
+  setMeta('name','keywords',c.meta_keywords);
+  setMeta('name','theme-color',c.primary_color);
+  setMeta('property','og:title',c.meta_title); setMeta('property','og:description',c.meta_description);
+  setMeta('property','og:image',c.og_image); setMeta('property','og:url',c.site_domain);
+  setMeta('name','twitter:title',c.meta_title); setMeta('name','twitter:description',c.meta_description);
+  setMeta('name','twitter:image',c.og_image);
+  const can=document.querySelector('link[rel=canonical]'); if(can&&c.site_domain) can.href=c.site_domain;
+  // brand
+  document.getElementById('logo-text').textContent = c.logo_text || c.coach_name || 'Coach';
+  document.getElementById('nav-cta-text').textContent = c.cta_primary_text || 'Book a call';
+  CAL = c.calcom_link || '';
+}
+function setMeta(attr,key,val){ if(!val) return; let el=document.querySelector(`meta[${attr}="${key}"]`);
+  if(!el){ el=document.createElement('meta'); el.setAttribute(attr,key); document.head.appendChild(el);} el.setAttribute('content',val); }
+function shade(hex,pct){ const n=parseInt(hex.replace('#',''),16); let r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  const f=t=>Math.max(0,Math.min(255,Math.round(t+(t*pct/100)))); return '#'+[f(r),f(g),f(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+function uimg(url,w){ if(url&&url.includes('images.unsplash.com')&&!url.includes('&w=')) return url+(url.includes('?')?'&':'?')+'w='+w+'&q=75&auto=format&fit=crop'; return url; }
+
+function renderNav(rows){
+  document.getElementById('nav-links').innerHTML = (rows||[]).map(r=>`<a href="${esc(r.anchor)}">${esc(r.label)}</a>`).join('');
+}
+
+function heroSection(h){
+  const stats = [[h.stat1_value,h.stat1_label],[h.stat2_value,h.stat2_label],[h.stat3_value,h.stat3_label]]
+    .filter(s=>s[0]).map(s=>`<div class="stat"><div class="v">${esc(s[0])}</div><div class="l">${esc(s[1])}</div></div>`).join('');
+  const hl = (h.headline||'').replace(/\*(.+?)\*/g,'<span class="hl">$1</span>');
+  return `<section class="hero" id="top"><div class="container hero-grid">
+    <div class="hero-text reveal">
+      ${h.badge?`<div class="hero-badge"><i class="ti ti-sparkles"></i>${esc(h.badge)}</div>`:''}
+      <h1>${hl}</h1>
+      <p class="hero-sub">${esc(h.subheadline)}</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-book><i class="ti ti-calendar"></i>${esc(h.cta_text||CFG.cta_primary_text||'Book a call')}</button>
+        ${h.cta_secondary_text?`<a class="btn btn-ghost" href="${esc(h.cta_secondary_url||'#services')}">${esc(h.cta_secondary_text)}</a>`:''}
+      </div>
+      ${stats?`<div class="hero-stats">${stats}</div>`:''}
+    </div>
+    <div class="hero-media reveal">
+      <img src="${esc(uimg(h.image,900))}" alt="${esc(h.image_alt)}" width="900" height="1125" fetchpriority="high">
+      ${h.float_value?`<div class="hero-float"><div class="ic"><i class="ti ti-${esc(h.float_icon||'trophy')}"></i></div>
+        <div><div class="t1">${esc(h.float_value)}</div><div class="t2">${esc(h.float_label)}</div></div></div>`:''}
+    </div></div></section>`;
+}
+
+function aboutSection(a){
+  const pts = list(a.points).map(p=>`<li><i class="ti ti-circle-check-filled"></i><span>${esc(p)}</span></li>`).join('');
+  return `<section class="about" id="about"><div class="container about-grid">
+    <div class="about-media reveal"><img src="${esc(uimg(a.image,800))}" alt="${esc(a.image_alt)}" loading="lazy" width="800" height="800"></div>
+    <div class="reveal">
+      ${a.eyebrow?`<span class="eyebrow">${esc(a.eyebrow)}</span>`:''}
+      <h2>${esc(a.heading)}</h2>
+      <p class="intro">${esc(a.intro)}</p>
+      <div class="story">${a.story||''}</div>
+      ${pts?`<ul class="about-points">${pts}</ul>`:''}
+      ${a.signature?`<div class="sig">${esc(a.signature)}</div>`:''}
+    </div></div></section>`;
+}
+
+function servicesSection(rows,meta){
+  if(!rows||!rows.length) return '';
+  const cards = rows.slice().sort((a,b)=>(+a.order||0)-(+b.order||0)).map(s=>{
+    const feats = list(s.deliverables).map(d=>`<li><i class="ti ti-check"></i><span>${esc(d)}</span></li>`).join('');
+    return `<div class="s-card reveal">
+      <div class="s-icon"><i class="ti ti-${esc(s.icon||'target-arrow')}"></i></div>
+      ${s.target_audience?`<div class="s-aud">${esc(s.target_audience)}</div>`:''}
+      <h3>${esc(s.name)}</h3>
+      <p class="s-desc">${esc(s.description)}</p>
+      <div class="s-meta">
+        ${s.duration?`<span><i class="ti ti-clock"></i>${esc(s.duration)}</span>`:''}
+        ${s.frequency?`<span><i class="ti ti-calendar-repeat"></i>${esc(s.frequency)}</span>`:''}
+      </div>
+      ${feats?`<ul class="feat">${feats}</ul>`:''}
+      <div class="s-foot">
+        ${s.price?`<div class="s-price">${money(s.price,CFG.currency)} <small>${esc(s.pricing_model||'')}</small></div>`:''}
+        <button class="btn btn-primary" data-book>${esc(s.cta_text||'Book a call')}</button>
+      </div></div>`;
+  }).join('');
+  return `<section class="services" id="services"><div class="container">
+    <div class="section-head reveal">${meta.eyebrow?`<span class="eyebrow">${esc(meta.eyebrow)}</span>`:''}
+      <h2>${esc(meta.heading||'Services')}</h2><p>${esc(meta.intro||'')}</p></div>
+    <div class="cards">${cards}</div></div></section>`;
+}
+
+function testimonialsSection(rows,meta){
+  if(!rows||!rows.length) return '';
+  const cards = rows.map(t=>{
+    const rating = Math.max(0,Math.min(5,+(t.rating||5)));
+    const photo = t.photo?`<img src="${esc(uimg(t.photo,96))}" alt="${esc(t.client_name)}" loading="lazy" width="48" height="48">`
+      :`<div class="ph">${esc((t.client_name||'?').charAt(0))}</div>`;
+    return `<div class="t-card reveal">
+      <div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5-rating)}</div>
+      <p class="t-quote">${esc(t.testimonial)}</p>
+      ${t.result_value?`<div class="t-result"><span class="rv">${esc(t.result_value)}</span><span class="rl">${esc(t.result_metric||'')}</span></div>`:''}
+      <div class="t-author">${photo}<div><div class="n">${esc(t.client_name)}</div>
+        <div class="r">${esc(t.role)}${t.company?', '+esc(t.company):''}</div></div></div></div>`;
+  }).join('');
+  return `<section class="testimonials" id="testimonials"><div class="container">
+    <div class="section-head reveal">${meta.eyebrow?`<span class="eyebrow">${esc(meta.eyebrow)}</span>`:''}
+      <h2>${esc(meta.heading||'What clients say')}</h2><p>${esc(meta.intro||'')}</p></div>
+    <div class="t-cards">${cards}</div></div></section>`;
+}
+
+function pricingSection(rows,meta){
+  if(!rows||!rows.length) return '';
+  const cards = rows.slice().sort((a,b)=>(+a.order||0)-(+b.order||0)).map(p=>{
+    const inc = list(p.features).map(f=>`<li class="yes"><i class="ti ti-check"></i><span>${esc(f)}</span></li>`).join('');
+    const exc = list(p.excluded).map(f=>`<li class="no"><i class="ti ti-x"></i><span>${esc(f)}</span></li>`).join('');
+    const per = p.billing&&p.billing!=='one-time'?`/${esc(p.billing)}`:'';
+    return `<div class="p-card reveal ${bool(p.is_popular)?'popular':''}">
+      ${bool(p.is_popular)?`<div class="p-tag">Most popular</div>`:''}
+      <div class="p-name">${esc(p.tier_name)}</div>
+      ${p.target_audience?`<div class="p-aud">${esc(p.target_audience)}</div>`:''}
+      <div class="p-price"><span class="amt">${money(p.price,p.currency||CFG.currency)}</span><span class="per">${per}</span></div>
+      ${p.duration?`<div class="p-dur">${esc(p.duration)}</div>`:''}
+      <ul class="p-feat">${inc}${exc}</ul>
+      <button class="btn ${bool(p.is_popular)?'btn-primary':'btn-ghost'}" data-book>${esc(p.cta_text||'Get started')}</button>
+    </div>`;
+  }).join('');
+  return `<section class="pricing" id="pricing"><div class="container">
+    <div class="section-head reveal">${meta.eyebrow?`<span class="eyebrow">${esc(meta.eyebrow)}</span>`:''}
+      <h2>${esc(meta.heading||'Pricing')}</h2><p>${esc(meta.intro||'')}</p></div>
+    <div class="p-cards">${cards}</div></div></section>`;
+}
+
+function faqSection(rows,meta){
+  if(!rows||!rows.length) return '';
+  const items = rows.slice().sort((a,b)=>(+a.order||0)-(+b.order||0)).map(f=>`
+    <div class="faq-item"><button class="faq-q">${esc(f.question)}<i class="ti ti-plus"></i></button>
+      <div class="faq-a"><div class="faq-a-inner">${f.answer||''}</div></div></div>`).join('');
+  return `<section class="faq" id="faq"><div class="container">
+    <div class="section-head reveal">${meta.eyebrow?`<span class="eyebrow">${esc(meta.eyebrow)}</span>`:''}
+      <h2>${esc(meta.heading||'Frequently asked questions')}</h2><p>${esc(meta.intro||'')}</p></div>
+    <div class="faq-wrap">${items}</div></div></section>`;
+}
+
+let BLOG=[];
+function blogSection(rows,meta){
+  if(!rows||!rows.length) return '';
+  BLOG = rows;
+  const cards = rows.map((b,i)=>`
+    <article class="b-card reveal" data-post="${i}">
+      <img src="${esc(uimg(b.image,700))}" alt="${esc(b.image_alt)}" loading="lazy" width="700" height="394">
+      <div class="b-body"><div class="b-cat">${esc(b.category)}</div>
+        <h3>${esc(b.title)}</h3><p class="b-ex">${esc(b.meta_description)}</p>
+        <div class="b-meta"><span><i class="ti ti-calendar"></i> ${fmtDate(b.publish_date)}</span>
+          ${b.reading_time?`<span><i class="ti ti-clock"></i> ${esc(b.reading_time)} min</span>`:''}</div>
+        <span class="b-more">Read article <i class="ti ti-arrow-right"></i></span>
+      </div></article>`).join('');
+  return `<section class="blog" id="blog"><div class="container">
+    <div class="section-head reveal">${meta.eyebrow?`<span class="eyebrow">${esc(meta.eyebrow)}</span>`:''}
+      <h2>${esc(meta.heading||'Latest insights')}</h2><p>${esc(meta.intro||'')}</p></div>
+    <div class="b-cards">${cards}</div></div></section>`;
+}
+function fmtDate(d){ if(!d) return ''; const dt=new Date(d); return isNaN(dt)?d:dt.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}); }
+
+function ctaSection(c){
+  if(!c.heading) return '';
+  return `<section class="cta-final"><div class="container reveal">
+    <h2>${esc(c.heading)}</h2><p>${esc(c.subheadline)}</p>
+    <button class="btn btn-light" data-book><i class="ti ti-calendar"></i> ${esc(c.cta_text||CFG.cta_primary_text||'Book a call')}</button>
+  </div></section>`;
+}
+
+function footerSection(f,nav){
+  const links = (nav||[]).map(r=>`<a href="${esc(r.anchor)}">${esc(r.label)}</a>`).join('');
+  const soc = [['linkedin',CFG.linkedin],['brand-x',CFG.twitter],['brand-instagram',CFG.instagram],['brand-facebook',CFG.facebook]]
+    .filter(s=>s[1]).map(s=>`<a href="${esc(s[1])}" target="_blank" rel="noopener" aria-label="${s[0]}"><i class="ti ti-${s[0]}"></i></a>`).join('');
+  return `<footer><div class="container">
+    <div class="f-grid">
+      <div class="f-brand"><div class="logo"><span class="dot"></span>${esc(CFG.logo_text||CFG.coach_name)}</div>
+        <p>${esc(f.about_text||CFG.footer_tagline||'')}</p>
+        ${soc?`<div class="f-social">${soc}</div>`:''}</div>
+      <div class="f-col"><h4>Explore</h4>${links}</div>
+      <div class="f-col"><h4>Contact</h4>
+        ${CFG.email?`<a href="mailto:${esc(CFG.email)}">${esc(CFG.email)}</a>`:''}
+        ${CFG.phone?`<a href="tel:${esc(CFG.phone)}">${esc(CFG.phone)}</a>`:''}
+        ${CFG.location?`<p>${esc(CFG.location)}</p>`:''}</div>
+      <div class="f-col"><h4>Get started</h4><p>${esc(f.cta_text||'Ready when you are.')}</p>
+        <button class="btn btn-primary" data-book style="margin-top:6px">${esc(CFG.cta_primary_text||'Book a call')}</button></div>
+    </div>
+    <div class="f-bottom">© ${new Date().getFullYear()} ${esc(CFG.coach_name||'')}. ${esc(f.copyright||'All rights reserved.')}</div>
+  </div></footer>`;
+}
+
+/* ============ JSON-LD ============ */
+function buildJsonLd(S){
+  const c=CFG, faq=S.faq||[], services=S.services||[], tst=S.testimonials||[];
+  const graph=[
+    {"@type":"Person","name":c.coach_name,"jobTitle":c.coach_title,"description":c.meta_description,
+      "image":c.og_image,"url":c.site_domain,
+      "sameAs":[c.linkedin,c.twitter,c.instagram].filter(Boolean)},
+    {"@type":"Organization","name":c.coach_name,"url":c.site_domain,"logo":c.og_image,
+      "email":c.email,"telephone":c.phone}
+  ];
+  if(services.length) services.forEach(s=>graph.push({"@type":"Service","name":s.name,"description":s.description,
+    "provider":{"@type":"Person","name":c.coach_name},
+    ...(s.price?{"offers":{"@type":"Offer","price":String(s.price).replace(/[^0-9.]/g,''),"priceCurrency":c.currency||'USD'}}:{})}));
+  if(faq.length) graph.push({"@type":"FAQPage","mainEntity":faq.map(f=>({"@type":"Question","name":f.question,
+    "acceptedAnswer":{"@type":"Answer","text":(f.answer||'').replace(/<[^>]+>/g,'')}}))});
+  if(tst.length) graph.push({"@type":"Product","name":c.coach_name+" Coaching",
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":String(tst.length)},
+    "review":tst.map(t=>({"@type":"Review","author":{"@type":"Person","name":t.client_name},
+      "reviewRating":{"@type":"Rating","ratingValue":String(t.rating||5)},"reviewBody":t.testimonial}))});
+  document.getElementById('jsonld').textContent = JSON.stringify({"@context":"https://schema.org","@graph":graph});
+}
+
+/* ============ MOUNT ============ */
+function render(S){
+  applyConfig(kv(S.config));
+  renderNav(S.nav);
+  const meta = name => kv((S.meta||[]).filter(r=>(r.key||'').startsWith(name+'_')).map(r=>({key:(r.key||'').slice(name.length+1),value:r.value})));
+  const show = k => CFG[k]===undefined || bool(CFG[k]);
+  const hero = kv(S.hero), about = kv(S.about), cta = kv(S.cta_final), foot = kv(S.footer);
+  let html = '';
+  html += heroSection(hero);
+  html += aboutSection(about);
+  html += servicesSection(S.services, meta('services'));
+  if(show('show_testimonials')) html += testimonialsSection(S.testimonials, meta('testimonials'));
+  if(show('show_pricing')) html += pricingSection(S.pricing, meta('pricing'));
+  if(show('show_faq')) html += faqSection(S.faq, meta('faq'));
+  if(show('show_blog')) html += blogSection(S.blog, meta('blog'));
+  html += ctaSection(cta);
+  document.getElementById('app').innerHTML = html;
+  document.getElementById('app').insertAdjacentHTML('afterend', footerSection(foot,S.nav));
+  buildJsonLd(S);
+  wire();
+  observeReveal();
+  if(location.hash.startsWith('#post/')) openPostBySlug(location.hash.slice(6));
+}
+
+/* ============ INTERACTIONS ============ */
+function openBook(){
+  const m=document.getElementById('book-modal'), f=document.getElementById('cal-frame');
+  if(CAL && !f.src){ f.src = CAL.startsWith('http')?CAL:`https://cal.com/${CAL}?embed=true&theme=light`; }
+  m.classList.add('open'); m.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+}
+function closeBook(){ const m=document.getElementById('book-modal'); m.classList.remove('open');
+  m.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+
+function openPost(i){
+  const b=BLOG[i]; if(!b) return;
+  const ov=document.getElementById('post-overlay');
+  document.getElementById('post-content').innerHTML = `
+    <div class="post-hero"><img src="${esc(uimg(b.image,1400))}" alt="${esc(b.image_alt)}">
+      <div class="scrim"></div>
+      <div class="post-head"><div class="container"><div class="b-cat">${esc(b.category)}</div>
+        <h1>${esc(b.title)}</h1>
+        <div class="pm"><span><i class="ti ti-user"></i> ${esc(b.author||CFG.coach_name)}</span>
+          <span><i class="ti ti-calendar"></i> ${fmtDate(b.publish_date)}</span>
+          ${b.reading_time?`<span><i class="ti ti-clock"></i> ${esc(b.reading_time)} min read</span>`:''}</div>
+      </div></div></div>
+    <article class="post-body">${b.content||''}
+      <p style="margin-top:40px"><button class="btn btn-primary" data-book><i class="ti ti-calendar"></i> ${esc(CFG.cta_primary_text||'Book a call')}</button></p>
+    </article>`;
+  ov.classList.add('open'); document.body.style.overflow='hidden';
+  history.replaceState(null,'','#post/'+(b.slug||i));
+  document.title = b.title+' | '+(CFG.coach_name||'');
+  ov.scrollTop=0;
+}
+function openPostBySlug(slug){ const i=BLOG.findIndex(b=>(b.slug||'')===slug); if(i>=0) openPost(i); }
+function closePost(){ document.getElementById('post-overlay').classList.remove('open');
+  document.body.style.overflow=''; history.replaceState(null,'','#blog'); document.title=CFG.meta_title||CFG.coach_name||'Coach'; }
+
+function wire(){
+  document.querySelectorAll('[data-book]').forEach(b=>b.onclick=openBook);
+  document.querySelectorAll('.faq-q').forEach(q=>q.onclick=()=>q.closest('.faq-item').classList.toggle('open'));
+  document.querySelectorAll('[data-post]').forEach(c=>c.onclick=()=>openPost(+c.dataset.post));
+}
+document.querySelectorAll('[data-close-book]').forEach(b=>b.onclick=closeBook);
+document.getElementById('book-modal').onclick=e=>{ if(e.target.id==='book-modal') closeBook(); };
+document.getElementById('post-back').onclick=closePost;
+document.getElementById('burger').onclick=()=>document.getElementById('nav-links').classList.toggle('open');
+document.getElementById('nav-links').onclick=e=>{ if(e.target.tagName==='A') document.getElementById('nav-links').classList.remove('open'); };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeBook();
+  if(document.getElementById('post-overlay').classList.contains('open')) closePost(); }});
+
+function observeReveal(){
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+
+/* ============ BOOT ============ */
+async function boot(){
+  let text='';
+  try{
+    const res = await fetch('coach-data.tsv',{cache:'no-store'});
+    if(res.ok) text = await res.text();
+  }catch(e){ /* file:// or offline -> fallback */ }
+  if(!text || !text.includes('#config')){
+    text = document.getElementById('fallback-tsv').textContent;
+  }
+  try{
+    const sheets = parseMultiSheetTSV(text);
+    render(sheets);
+  }catch(err){
+    document.getElementById('app').innerHTML =
+      `<div class="loading"><div><strong>Could not render site.</strong><br><span style="color:var(--muted)">${esc(err.message)}</span></div></div>`;
+    console.error(err);
+  }
+}
+boot();
+</script>
+</body>
+</html>

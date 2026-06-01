@@ -1,0 +1,9 @@
+{
+  // Static-assets-only Worker. Serves everything in ./public as a static site.
+  // Edit content in public/coach-data.tsv — no build step needed.
+  "name": "sample-coach-website",
+  "compatibility_date": "2025-05-01",
+  "assets": {
+    "directory": "./public"
+  }
+}
