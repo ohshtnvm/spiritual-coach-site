@@ -5,13 +5,13 @@ coach_title	Spiritual Life Coach & Meditation Guide
 coach_type	spiritual
 logo_text	Maya Patel
 currency	USD
-primary_color	#001f3f
-secondary_color	#001f3f
-accent_color	#d4af37
-text_dark	#1a1a1a
-bg_light	#f8f6f1
-font_heading	Plus Jakarta Sans
-font_body	Inter
+primary_color	#A38AB0
+secondary_color	#4A4458
+accent_color	#D9B96B
+text_dark	#5A5560
+bg_light	#F7F2F6
+font_heading	Fraunces
+font_body	Nunito Sans
 site_domain	https://mayapatel.example.com
 email	hello@mayapatel.example.com
 phone	+1 (555) 888-1111
@@ -60,6 +60,7 @@ blog_heading	Reflections & practices
 blog_intro	Essays and guided practices to deepen your inner work.
 
 #hero
+key	value
 badge	Trusted by 500+ seekers on their transformation
 headline	Find your path to *peace* and *purpose*
 subheadline	Personalized spiritual guidance to help you awaken to your authentic self, release what no longer serves, and live in alignment with your deepest values.
@@ -79,6 +80,7 @@ stat3_value	Global
 stat3_label	community
 
 #about
+key	value
 eyebrow	My journey
 heading	From seeker to guide — helping others find their light
 image	https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=75&auto=format&fit=crop
@@ -119,9 +121,10 @@ How private is this?	<p>Completely confidential. Our conversations, your practic
 title	slug	meta_description	content	publish_date	category	tags	reading_time	image	image_alt	author	featured
 The Art of Letting Go: Release What No Longer Serves	letting-go	Master the spiritual practice of releasing patterns, beliefs, and attachments that limit your freedom and authentic expression.	<p>One of the most transformative spiritual practices is learning what to release.</p><p>We spend much of our lives accumulating: beliefs, habits, relationships, identities. But growth often demands the opposite — the willingness to let go.</p><h2>Why Letting Go Is Hard</h2><p>Letting go feels like loss, even when what we're releasing causes us pain. We cling to the familiar because at least we know it. The unknown terrifies us.</p><h2>The Practice of Sacred Release</h2><p>I use a simple somatic practice with clients: notice what you're holding (literally and metaphorically), feel the weight of it, speak what you're releasing, then consciously open your hands and let it fall away.</p><blockquote>Freedom lives on the other side of release.</blockquote><p>This practice works whether you're releasing a belief, a relationship, a version of yourself that no longer fits, or even unexpressed grief.</p><h2>After the Release</h2><p>Notice the space that opens. That's where your new self is born.</p>	2026-05-15	reflections	letting-go,transformation,spiritual-practice	6	https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=700&q=75&auto=format&fit=crop	Woman in meditation posture releasing into surrender	Maya Patel	true
 Finding Your North Star: How to Reconnect With Purpose	north-star	A guided exploration of discovering (or rediscovering) your authentic purpose and the spiritual practice of staying aligned with it.	<p>Purpose is not something you find once and keep forever. It evolves as you do.</p><p>Many of my clients come in burnt out, wondering "Is this really what I'm meant to do?" They've disconnected from their north star — the inner knowing of why they're here.</p><h2>Purpose vs. Goals</h2><p>Goals are destinations. Purpose is why the journey matters.</p><p>You can achieve every goal and still feel empty if you've lost sight of purpose. Conversely, you can pursue a purpose-driven life and feel fulfilled even when external circumstances are imperfect.</p><h2>Reconnecting With Your Why</h2><p>Here's a practice: sit quietly and ask yourself: "What makes me feel most alive? What would I do even without external reward?" Listen. Don't think. Feel.</p><p>Your answer is a thread back to your north star.</p>	2026-04-28	practices	purpose,alignment,authenticity	5	https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&q=75&auto=format&fit=crop	Stars guiding a spiritual seeker	Maya Patel	false
-Grief as a Gateway: Honoring Loss in Your Spiritual Unfolding	grief-gateway	Why grief is not the enemy of spirituality — it's an invitation to deeper compassion, wisdom, and wholeness.	<p>Spiritual seekers sometimes believe they should transcend difficult emotions like grief. But this is a misunderstanding.</p><p>Grief is sacred. It's how we honor what mattered. And it opens us to profound compassion — for ourselves and others.</p><h2>Grief Isn't Linear</h2><p>It comes in waves. You can be "healed" and still cry. This is wholeness, not regression.</p><h2>The Spiritual Work of Grieving</h2><p>Instead of rushing past it, I invite clients to befriend their grief. Sit with it. Journal with it. Let it move through your body. It has wisdom for you.</p><h2>On the Other Side</h2><p>When you stop fighting your grief, you find softness. Wisdom. A deeper capacity to love.</p>	2026-04-05	reflections	grief,loss,compassion	7	https://images.unsplash.com/photo-1491841573634-28fb1f2f9b60?w=700&q=75&auto=format&fit=crop	Hands in a gesture of surrender and peace	Maya Patel	false
+Grief as a Gateway: Honoring Loss in Your Spiritual Unfolding	grief-gateway	Why grief is not the enemy of spirituality — it's an invitation to deeper compassion, wisdom, and wholeness.	<p>Spiritual seekers sometimes believe they should transcend difficult emotions like grief. But this is a misunderstanding.</p><p>Grief is sacred. It's how we honor what mattered. And it opens us to profound compassion — for ourselves and others.</p><h2>Grief Isn't Linear</h2><p>It comes in waves. You can be "healed" and still cry. This is wholeness, not regression.</p><h2>The Spiritual Work of Grieving</h2><p>Instead of rushing past it, I invite clients to befriend their grief. Sit with it. Journal with it. Let it move through your body. It has wisdom for you.</p><h2>On the Other Side</h2><p>When you stop fighting your grief, you find softness. Wisdom. A deeper capacity to love.</p>	2026-04-05	reflections	grief,loss,compassion	7	https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=700&q=75&auto=format&fit=crop	A quiet forest path symbolizing the journey through grief	Maya Patel	false
 
 #cta_final
+key	value
 heading	Ready to find your path?
 subheadline	Let's talk about where you are and what awakening looks like for you — free, confidential, no obligation.
 cta_text	Book your free discovery call
