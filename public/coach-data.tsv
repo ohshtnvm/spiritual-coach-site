@@ -92,9 +92,9 @@ signature	— Maya
 
 #services
 name	slug	target_audience	description	duration	frequency	deliverables	price	pricing_model	icon	cta_text	order
-Awakening Sessions	awakening-sessions	Seekers beginning their spiritual journey	One-on-one guidance to explore your questions, beliefs, and what authenticity means for you.	6 weeks	Weekly	6 video calls|Guided journaling prompts|Meditation recordings|Email support	697	one-time	sparkles	Book a session	1
-Sacred Alignment Coaching	sacred-alignment	Those ready for deeper inner work	Personalized coaching to uncover blocks, release old patterns, and align your life with your true self.	3 months	Bi-weekly	6 coaching sessions|Personalized ritual practices|Somatic release work|Intuitive guidance	1800	one-time	heart	Start your alignment	2
-Soul Evolution Program	soul-evolution	Committed seekers on a transformational path	Complete spiritual transformation — healing, awakening, and building a life rooted in purpose and peace.	6 months	Bi-weekly + monthly group	12 private sessions|Monthly group wisdom circles|Personalized spiritual practices|Lifetime community access	4200	one-time	moon-stars	Apply for enrollment	3
+Awakening Sessions	awakening-sessions	Seekers beginning their spiritual journey	One-on-one guidance to explore your questions, beliefs, and what authenticity means for you.	6 weeks	Weekly	6 video calls|Guided journaling prompts|Meditation recordings|Email support			sparkles	Learn about pricing	1
+Sacred Alignment Coaching	sacred-alignment	Those ready for deeper inner work	Personalized coaching to uncover blocks, release old patterns, and align your life with your true self.	3 months	Bi-weekly	6 coaching sessions|Personalized ritual practices|Somatic release work|Intuitive guidance			heart	Learn about pricing	2
+Soul Evolution Program	soul-evolution	Committed seekers on a transformational path	Complete spiritual transformation — healing, awakening, and building a life rooted in purpose and peace.	6 months	Bi-weekly + monthly group	12 private sessions|Monthly group wisdom circles|Personalized spiritual practices|Lifetime community access			moon-stars	Learn about pricing	3
 
 #testimonials
 client_name	role	company	industry	testimonial	result_metric	result_value	photo	rating
